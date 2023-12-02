@@ -122,8 +122,8 @@ def get_retrieval_tool(assistant_id: str):
 #     AvailableTools.TAVILY_ANSWER: _get_tavily_answer,
 # }
 
-TOOL_OPTIONS = {e.value: e.value for e in AvailableTools}
+# TOOL_OPTIONS = {e.value: e.value for e in AvailableTools}
 
-# Check if dependencies and env vars for each tool are available
-for k, v in TOOLS.items():
-    v()
+# # Check if dependencies and env vars for each tool are available
+# for k, v in TOOLS.items():
+#     v()
