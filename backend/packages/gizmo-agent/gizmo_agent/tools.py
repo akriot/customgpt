@@ -4,7 +4,7 @@ from langchain.pydantic_v1 import BaseModel, Field
 # from langchain.retrievers import KayAiRetriever, PubMedRetriever, WikipediaRetriever
 # from langchain.retrievers.you import YouRetriever
 # from langchain.tools import ArxivQueryRun, DuckDuckGoSearchRun
-# from langchain.tools.retriever import create_retriever_tool
+from langchain.tools.retriever import create_retriever_tool
 # from langchain.tools.tavily_search import TavilyAnswer, TavilySearchResults
 # from langchain.utilities import ArxivAPIWrapper
 # from langchain.utilities.tavily_search import TavilySearchAPIWrapper
@@ -97,33 +97,34 @@ def get_retrieval_tool(assistant_id: str):
 #     return TavilyAnswer(api_wrapper=tavily_search)
 
 
-# class AvailableTools(str, Enum):
-#     DDG_SEARCH = "DDG Search"
-#     TAVILY = "Search (Tavily)"
-#     TAVILY_ANSWER = "Search (short answer, Tavily)"
-#     RETRIEVAL = "Retrieval"
-#     ARXIV = "Arxiv"
-#     YOU_SEARCH = "You.com Search"
-#     SEC_FILINGS = "SEC Filings (Kay.ai)"
-#     PRESS_RELEASES = "Press Releases (Kay.ai)"
-#     PUBMED = "PubMed"
-#     WIKIPEDIA = "Wikipedia"
+class AvailableTools(str, Enum):
+    # DDG_SEARCH = "DDG Search"
+    # TAVILY = "Search (Tavily)"
+    # TAVILY_ANSWER = "Search (short answer, Tavily)"
+    RETRIEVAL = "Retrieval"
+    # ARXIV = "Arxiv"
+    # YOU_SEARCH = "You.com Search"
+    # SEC_FILINGS = "SEC Filings (Kay.ai)"
+    # PRESS_RELEASES = "Press Releases (Kay.ai)"
+    # PUBMED = "PubMed"
+    # WIKIPEDIA = "Wikipedia"
 
 
-# TOOLS = {
-#     AvailableTools.DDG_SEARCH: _get_duck_duck_go,
-#     AvailableTools.ARXIV: _get_arxiv,
-#     AvailableTools.YOU_SEARCH: _get_you_search,
-#     AvailableTools.SEC_FILINGS: _get_sec_filings,
-#     AvailableTools.PRESS_RELEASES: _get_press_releases,
-#     AvailableTools.PUBMED: _get_pubmed,
-#     AvailableTools.TAVILY: _get_tavily,
-#     AvailableTools.WIKIPEDIA: _get_wikipedia,
-#     AvailableTools.TAVILY_ANSWER: _get_tavily_answer,
-# }
+TOOLS = {
+    # AvailableTools.DDG_SEARCH: _get_duck_duck_go,
+    # AvailableTools.ARXIV: _get_arxiv,
+    # AvailableTools.YOU_SEARCH: _get_you_search,
+    # AvailableTools.SEC_FILINGS: _get_sec_filings,
+    # AvailableTools.PRESS_RELEASES: _get_press_releases,
+    # AvailableTools.PUBMED: _get_pubmed,
+    # AvailableTools.TAVILY: _get_tavily,
+    # AvailableTools.WIKIPEDIA: _get_wikipedia,
+    # AvailableTools.TAVILY_ANSWER: _get_tavily_answer,
+    AvailableTools.RETRIEVAL: get_retrieval_tool,
+}
 
-# TOOL_OPTIONS = {e.value: e.value for e in AvailableTools}
+TOOL_OPTIONS = {e.value: e.value for e in AvailableTools}
 
-# # Check if dependencies and env vars for each tool are available
-# for k, v in TOOLS.items():
-#     v()
+# Check if dependencies and env vars for each tool are available
+for k, v in TOOLS.items():
+    v()
