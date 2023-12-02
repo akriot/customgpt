@@ -1,6 +1,6 @@
-# from enum import Enum
+from enum import Enum
 
-# from langchain.pydantic_v1 import BaseModel, Field
+from langchain.pydantic_v1 import BaseModel, Field
 # from langchain.retrievers import KayAiRetriever, PubMedRetriever, WikipediaRetriever
 # from langchain.retrievers.you import YouRetriever
 # from langchain.tools import ArxivQueryRun, DuckDuckGoSearchRun
@@ -8,9 +8,9 @@
 # from langchain.tools.tavily_search import TavilyAnswer, TavilySearchResults
 # from langchain.utilities import ArxivAPIWrapper
 # from langchain.utilities.tavily_search import TavilySearchAPIWrapper
-# from langchain.vectorstores.redis import RedisFilter
+from langchain.vectorstores.redis import RedisFilter
 
-# from gizmo_agent.ingest import vstore
+from gizmo_agent.ingest import vstore
 
 
 # class DDGInput(BaseModel):
@@ -29,14 +29,14 @@
 # If the user is referencing particular files, that is often a good hint that information may be here."""
 
 
-# def get_retrieval_tool(assistant_id: str):
-#     return create_retriever_tool(
-#         vstore.as_retriever(
-#             search_kwargs={"filter": RedisFilter.tag("namespace") == assistant_id}
-#         ),
-#         "Retriever",
-#         RETRIEVER_DESCRIPTION,
-#     )
+def get_retrieval_tool(assistant_id: str):
+    return create_retriever_tool(
+        vstore.as_retriever(
+            search_kwargs={"filter": RedisFilter.tag("namespace") == assistant_id}
+        ),
+        "Retriever",
+        RETRIEVER_DESCRIPTION,
+    )
 
 
 # def _get_duck_duck_go():
@@ -122,8 +122,8 @@
 #     AvailableTools.TAVILY_ANSWER: _get_tavily_answer,
 # }
 
-# TOOL_OPTIONS = {e.value: e.value for e in AvailableTools}
+TOOL_OPTIONS = {e.value: e.value for e in AvailableTools}
 
-# # Check if dependencies and env vars for each tool are available
-# for k, v in TOOLS.items():
-#     v()
+# Check if dependencies and env vars for each tool are available
+for k, v in TOOLS.items():
+    v()
